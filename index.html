@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Retiro · Prudential · Luz Ruiz</title>
+<meta name="description" content="Descubre cuánto puedes recibir a los 65 años con el plan Personaliza Pru de Prudential Seguros México.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f0f4f8;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;font-family:Arial,sans-serif}
+.w{width:100%;max-width:440px}
+.header{background:#003087;padding:1.1rem 1.25rem;border-radius:12px 12px 0 0;display:flex;align-items:center;gap:10px}
+.header i{font-size:26px;color:#85B7EB}
+.header-logo{font-size:18px;font-weight:700;color:#fff;letter-spacing:.3px}
+.header-sub{font-size:11px;color:#B5D4F4;margin-top:2px}
+.body{padding:1.1rem 1.1rem;background:#fff;border:1px solid #B5D4F4;border-top:none;border-radius:0 0 12px 12px}
+.field-lbl{font-size:13px;color:#555;margin-bottom:5px;display:block}
+.age-row{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem}
+.age-row input[type=range]{flex:1;accent-color:#0057B8;height:4px}
+.age-v{font-size:20px;font-weight:700;min-width:60px;color:#003087}
+.divider{border:none;border-top:1px solid #B5D4F4;margin:1rem 0}
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#0057B8;margin-bottom:.7rem;display:flex;align-items:center;gap:6px}
+.sec-title i{font-size:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:1rem}
+.mcard{background:#E6F0FA;border-radius:8px;padding:.875rem 1rem;border:1px solid #B5D4F4}
+.mcard.feat{background:#003087;border:2px solid #003087}
+.mc-tag{font-size:11px;padding:2px 8px;border-radius:6px;background:#fff;color:#003087;display:inline-block;margin-bottom:5px;font-weight:700}
+.mc-lbl{font-size:11px;color:#0C447C;margin-bottom:3px}
+.mc-sub{font-size:12px;color:#185FA5;margin-bottom:6px}
+.mc-sub-w{font-size:12px;color:#B5D4F4;margin-bottom:6px}
+.mc-val{font-size:18px;font-weight:700;color:#003087;line-height:1.2}
+.mc-val-w{font-size:18px;font-weight:700;color:#fff;line-height:1.2}
+.mc-foot{font-size:11px;color:#185FA5;margin-top:6px;padding-top:6px;border-top:1px solid #B5D4F4}
+.mc-foot-w{font-size:11px;color:#85B7EB;margin-top:6px;padding-top:6px;border-top:1px solid #185FA5}
+.cov-box{background:#EBF4FF;border:1px solid #B5D4F4;border-radius:12px;padding:.875rem 1rem;margin-bottom:1rem}
+.cov-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #B5D4F4;font-size:13px;gap:8px}
+.cov-row:last-child{border-bottom:none}
+.cov-lbl{display:flex;align-items:center;gap:7px;color:#185FA5;flex:1}
+.cov-lbl i{font-size:16px;color:#0057B8;flex-shrink:0}
+.cov-val{font-weight:700;color:#003087;text-align:right;font-size:12px}
+.hook-box{background:#E6F0FA;border-radius:12px;padding:1rem 1.1rem;margin-bottom:1rem;border-left:4px solid #0057B8}
+.hook-q{font-size:14px;font-weight:700;color:#003087;margin-bottom:.4rem;line-height:1.5}
+.hook-txt{font-size:13px;color:#185FA5;line-height:1.6;margin-bottom:.5rem}
+.hook-sub{font-size:12px;color:#0C447C;line-height:1.5;margin-bottom:.875rem}
+.rate-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:#003087;color:#fff;margin-left:4px;font-weight:700}
+.slider-row{display:flex;align-items:center;gap:8px;margin-bottom:.875rem}
+.slider-row input[type=range]{flex:1;accent-color:#0057B8}
+.slider-v{font-size:14px;font-weight:700;min-width:56px;color:#003087;text-align:right}
+.res-box{background:#fff;border:1px solid #B5D4F4;border-radius:8px;padding:.75rem 1rem;margin-bottom:.875rem}
+.cr-row{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;color:#185FA5}
+.cr-row span:last-child{font-weight:700;color:#003087}
+.cr-total{display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding-top:8px;margin-top:4px;border-top:1px solid #B5D4F4;color:#003087}
+.total-block{background:#003087;border-radius:12px;padding:1.1rem;margin-bottom:1rem;text-align:center}
+.total-lbl{font-size:13px;color:#85B7EB;margin-bottom:4px}
+.total-val{font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px}
+.total-sub{font-size:11px;color:#85B7EB}
+.agent-card{background:#EBF4FF;border:1px solid #B5D4F4;border-radius:12px;padding:1rem 1.1rem;margin-bottom:.875rem}
+.agent-top{display:flex;align-items:center;gap:12px;margin-bottom:.875rem}
+.agent-av{width:48px;height:48px;border-radius:50%;background:#003087;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}
+.agent-name{font-size:15px;font-weight:700;color:#003087;margin-bottom:2px}
+.agent-co{font-size:12px;color:#185FA5}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;font-size:15px;font-weight:700;background:#25D366;color:#fff;border:none;border-radius:8px;cursor:pointer;text-decoration:none;margin-bottom:8px}
+.wa-btn i{font-size:20px}
+.call-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;font-size:14px;color:#003087;background:#fff;border:1px solid #B5D4F4;border-radius:8px;cursor:pointer;text-decoration:none}
+.call-btn i{font-size:17px;color:#0057B8}
+.disc{font-size:10px;color:#185FA5;line-height:1.6;margin-top:.5rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="header">
+    <i class="ti ti-shield-check"></i>
+    <div>
+      <div class="header-logo">Prudential Seguros México</div>
+      <div class="header-sub">Personaliza Pru · Plan de retiro en UDIs</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <span class="field-lbl" style="margin-top:.25rem">¿Cuántos años tienes?</span>
+    <div class="age-row">
+      <input type="range" min="18" max="55" value="30" step="1" id="ageSlider">
+      <span class="age-v" id="ageVal">30 años</span>
+    </div>
+
+    <div class="sec-title"><i class="ti ti-piggy-bank"></i> Tu fondo de retiro a los 65 años</div>
+    <div class="grid2">
+      <div class="mcard" id="card10">
+        <div class="mc-lbl">Ahorrando</div>
+        <div class="mc-sub" id="years10">10 años</div>
+        <div class="mc-val" id="mxn10">$—</div>
+        <div class="mc-foot" id="monthly10">Desde $— /mes</div>
+      </div>
+      <div class="mcard feat" id="card20">
+        <div class="mc-tag">Recomendado</div>
+        <div class="mc-sub-w" id="years20">20 años</div>
+        <div class="mc-val-w" id="mxn20">$—</div>
+        <div class="mc-foot-w" id="monthly20">Desde $— /mes</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sec-title"><i class="ti ti-shield"></i> Coberturas incluidas</div>
+    <div class="cov-box">
+      <div class="cov-row">
+        <span class="cov-lbl"><i class="ti ti-heart-off"></i>Fallecimiento</span>
+        <span class="cov-val" id="covFall">—</span>
+      </div>
+      <div class="cov-row">
+        <span class="cov-lbl"><i class="ti ti-car-crash"></i>Muerte accidental</span>
+        <span class="cov-val" id="covAcc">—</span>
+      </div>
+      <div class="cov-row">
+        <span class="cov-lbl"><i class="ti ti-wheelchair"></i>Invalidez total y permanente</span>
+        <span class="cov-val" id="covInv">—</span>
+      </div>
+      <div class="cov-row">
+        <span class="cov-lbl"><i class="ti ti-activity"></i>Enfermedad terminal</span>
+        <span class="cov-val">Anticipo del fondo</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="hook-box">
+      <div class="hook-q">¿Se imagina si este plan fuera completamente flexible?</div>
+      <div class="hook-txt">¿Y si pudiera ahorrar algo adicional cuando quisiera — $500, $1,000, lo que le sobre ese mes — y ese dinero creciera todos los días?</div>
+      <div class="hook-sub">Con el fondo adicional, su ahorro extra crece a inflación + 2.5% anual<span class="rate-pill">7.1% anual</span></div>
+
+      <div class="sec-title" style="margin-bottom:.5rem"><i class="ti ti-calculator"></i> Simula tu ahorro extra mensual</div>
+      <div class="slider-row">
+        <input type="range" min="500" max="10000" value="2000" step="500" id="extraSlider">
+        <span class="slider-v" id="extraVal">$2,000</span>
+      </div>
+
+      <div class="res-box">
+        <div class="cr-row"><span>Aportación mensual extra</span><span id="crMen">$2,000</span></div>
+        <div class="cr-row"><span>Total aportado hasta los 65</span><span id="crAportado">$—</span></div>
+        <div class="cr-row"><span>Tasa fondo adicional</span><span>7.1% anual</span></div>
+        <div class="cr-total"><span>Tu fondo extra a los 65</span><span id="crFondo">$—</span></div>
+      </div>
+
+      <div class="total-block">
+        <div class="total-lbl">Tu potencial total a los 65 años</div>
+        <div class="total-val" id="totalFondo">$—</div>
+        <div class="total-sub">Plan base (20 años) + ahorro flexible</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sec-title"><i class="ti ti-user"></i> ¿Quieres más información?</div>
+    <div class="agent-card">
+      <div class="agent-top">
+        <div class="agent-av">LR</div>
+        <div>
+          <div class="agent-name">Luz Ruiz</div>
+          <div class="agent-co">Agente Prudential Seguros México</div>
+        </div>
+      </div>
+      <a class="wa-btn" id="waBtn" href="#" onclick="openWA(event)">
+        <i class="ti ti-brand-whatsapp"></i>
+        Quiero más información
+      </a>
+      <a class="call-btn" href="tel:+525640020354">
+        <i class="ti ti-phone"></i>
+        Llamar: +52 56 4002 0354
+      </a>
+    </div>
+
+    <div class="disc">Proyección ilustrativa · Inflación UDI 4.5% · Rendimiento fondo base 3.5% · Fondo adicional 7.1% nominal · Antes de ISR · No garantizados · Prudential 02/06/2026</div>
+  </div>
+</div>
+
+<script>
+const UDI=8.837062,INF=0.045,REND=0.035,REND_ADIC=0.071;
+const BASE_PA=1428,BASE_ED=26,BASE_AN=20;
+const WA_NUM='525640020354';
+let base20Global=0,edadGlobal=30;
+
+function primaAh(edad,anios){
+  return Math.round(BASE_PA*(Math.pow(1+REND,BASE_AN)/Math.pow(1+REND,anios))*(1+(edad-BASE_ED)*0.012));
+}
+function fondoU(pa,pay,hasta65){
+  let f=0;
+  for(let i=0;i<pay;i++) f=(f+pa)*(1+REND);
+  if(hasta65-pay>0) f*=Math.pow(1+REND,hasta65-pay);
+  return Math.round(f);
+}
+function udiPesos(u,anios){return Math.round(u*UDI*Math.pow(1+INF,anios));}
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-MX');}
+function fondoAdic(men,anios){
+  const r=REND_ADIC/12;
+  return Math.round(men*((Math.pow(1+r,anios*12)-1)/r));
+}
+function openWA(e){
+  e.preventDefault();
+  const edad=edadGlobal;
+  const extra=parseInt(document.getElementById('extraSlider').value);
+  const fondo=fondoAdic(extra,65-edad);
+  const total=base20Global+fondo;
+  const msg=encodeURIComponent(
+    'Hola Luz, vi tu calculadora de retiro Prudential y me interesa.\n\n'
+    +'Mi edad: '+edad+' años\n'
+    +'Fondo proyectado plan 20 años: '+fmt(base20Global)+'\n'
+    +'Ahorro extra mensual: '+fmt(extra)+'\n'
+    +'Fondo adicional proyectado: '+fmt(fondo)+'\n'
+    +'Total potencial a los 65: '+fmt(total)+'\n\n'
+    +'¿Me puede dar más información?'
+  );
+  window.open('https://wa.me/'+WA_NUM+'?text='+msg,'_blank');
+}
+function calc(){
+  const edad=parseInt(document.getElementById('ageSlider').value);
+  edadGlobal=edad;
+  const hasta65=65-edad;
+  document.getElementById('ageVal').textContent=edad+' años';
+  const show10=hasta65>=15,show20=hasta65>=25;
+  document.getElementById('card10').style.opacity=show10?'1':'0.35';
+  document.getElementById('card20').style.opacity=show20?'1':'0.35';
+  base20Global=0;
+  if(show10){
+    const pay=Math.min(10,hasta65-5);
+    const pa=primaAh(edad,pay);
+    const p=udiPesos(fondoU(pa,pay,hasta65),hasta65);
+    document.getElementById('years10').textContent=pay+' años de ahorro';
+    document.getElementById('mxn10').textContent=fmt(p);
+    document.getElementById('monthly10').textContent='Desde '+fmt(pa*UDI/12)+' /mes';
+  } else {
+    document.getElementById('years10').textContent='No disponible';
+    document.getElementById('mxn10').textContent='—';
+    document.getElementById('monthly10').textContent='';
+  }
+  if(show20){
+    const pay=Math.min(20,hasta65-5);
+    const pa=primaAh(edad,pay);
+    const p=udiPesos(fondoU(pa,pay,hasta65),hasta65);
+    base20Global=p;
+    document.getElementById('years20').textContent=pay+' años de ahorro';
+    document.getElementById('mxn20').textContent=fmt(p);
+    document.getElementById('monthly20').textContent='Desde '+fmt(pa*UDI/12)+' /mes';
+  } else {
+    document.getElementById('years20').textContent='No aplica';
+    document.getElementById('mxn20').textContent='—';
+    document.getElementById('monthly20').textContent='Menos de 25 años';
+    document.getElementById('card20').style.opacity='0.4';
+  }
+  const sumMXN=Math.round(60000*UDI);
+  document.getElementById('covFall').textContent='≈ '+fmt(sumMXN);
+  document.getElementById('covAcc').textContent='Doble ≈ '+fmt(sumMXN*2);
+  document.getElementById('covInv').textContent='≈ '+fmt(sumMXN);
+  calcExtra(hasta65);
+}
+function calcExtra(hasta65){
+  const men=parseInt(document.getElementById('extraSlider').value);
+  document.getElementById('extraVal').textContent=fmt(men);
+  document.getElementById('crMen').textContent=fmt(men);
+  document.getElementById('crAportado').textContent=fmt(men*hasta65*12);
+  const fondo=fondoAdic(men,hasta65);
+  document.getElementById('crFondo').textContent=fmt(fondo);
+  const total=base20Global+fondo;
+  document.getElementById('totalFondo').textContent=total>0?fmt(total):'—';
+}
+document.getElementById('ageSlider').addEventListener('input',calc);
+document.getElementById('extraSlider').addEventListener('input',function(){calcExtra(65-edadGlobal);});
+calc();
+</script>
+</body>
+</html>
